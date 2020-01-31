@@ -25,6 +25,7 @@ function! comments#AddCommentOperator(type)
       let current_line += 1
     endwhile
 
+    " insert the comment character
     execute 'normal! :' . replacement_range . 's/\v%' . min_column . 'c/' . g:comments_filetype_to_comment_char[&filetype] . ' /g' . "\<cr>"
   endif
 endfunction
@@ -32,9 +33,12 @@ endfunction
 function! comments#RemoveCommentOperator(type)
   if has_key(g:comments_filetype_to_comment_char, &filetype)
     if a:type ==# 'V'
-      execute "normal! :'<,'>" . 's/\v^(\s*)'. g:comments_filetype_to_comment_char[&filetype] . ' /\1/g' . "\<cr>"
+      let replacement_range = "'<,'>"
     elseif a:type ==# 'line'
-      execute "normal! :'[,']" . 's/\v^(\s*)'. g:comments_filetype_to_comment_char[&filetype] . ' /\1/g' . "\<cr>"
+      let replacement_range = "'[,']"
     endif
+
+    " remove the comment character
+    execute 'normal! :' . replacement_range . 's/\v^(\s*)' . g:comments_filetype_to_comment_char[&filetype] . ' /\1/g' . "\<cr>"
   endif
 endfunction
