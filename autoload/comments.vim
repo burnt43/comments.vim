@@ -21,6 +21,8 @@ function! comments#AddCommentOperator(type)
       if match_column_number !=# -1 && match_column_number < min_column
         let min_column = match_column_number
       endif
+
+      let current_line += 1
     endwhile
 
     execute "normal! :" . replacement_range . "s/\v%" . min_column . "c/" . g:comments_filetype_to_comment_char[&filetype] . " /g" . "\<cr>"
