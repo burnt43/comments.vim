@@ -25,7 +25,7 @@ function! comments#AddCommentOperator(type)
       let current_line += 1
     endwhile
 
-    execute "normal! :" . replacement_range . "s/\v%" . min_column . "c/" . g:comments_filetype_to_comment_char[&filetype] . " /g" . "\<cr>"
+    execute 'normal! :' . replacement_range . 's/\v%' . min_column . 'c/' . g:comments_filetype_to_comment_char[&filetype] . ' /g' . "\<cr>"
   endif
 endfunction
 
