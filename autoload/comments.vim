@@ -16,7 +16,7 @@ function! comments#AddCommentOperator(type)
     let min_column   = 999
 
     while current_line <= end_line
-      let match_column_number = matchstrpos(getline(current_line), '\v^\s*(\w)')[2]
+      let match_column_number = matchstrpos(getline(current_line), '\v^\s*.')[2]
 
       if match_column_number !=# -1 && match_column_number < min_column
         let min_column = match_column_number
